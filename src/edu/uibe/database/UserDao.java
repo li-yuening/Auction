@@ -276,6 +276,21 @@ public class UserDao {
 		}
 		return ii;
 	}
+	
+	public boolean executeUpdateItem(ItemInfo ii){
+		boolean result = true;
+		String sql="update auction.dbo.物品信息 set 物品名称=?,物品描述=?,起拍日期=?,结束日期=?,起标价=?,物品类别编号=? where 物品编号=?";
+		String[] parameters={ii.getItemName(),ii.getItemDescription(),ii.getStartBidDate(),ii.getEndBidDate(),ii.getStartBidPrice(),ii.getItemClassNumber(),ii.getItemNumber()};
+		try{
+			DBUtil.executeUpdate(sql, parameters);
+		}catch(Exception e){
+			e.printStackTrace();
+			result = false;
+		}finally{
+			DBUtil.close(DBUtil.getConn(), DBUtil.getPs(), DBUtil.getRs());
+		}
+		return result;
+	}
 
 //	//Execute first-step detection, and return bottle detection number, as well as report number
 //	public BottleDetectNumber_RptNo executeChubuPanduan(ChubuPanduanResult cpr){
@@ -847,27 +862,6 @@ public class UserDao {
 //			DBUtil.executeUpdate(sql, parameters);
 //		}else{
 //			String[] parameters={"-",null,null,null,"1","1",nddr.getOperatorName(),nowTime,null,nddr.getBottleDetectNumber()};
-//			DBUtil.executeUpdate(sql, parameters);
-//		}
-//		rc=1;
-//		DBUtil.close(DBUtil.getConn(), DBUtil.getPs(), DBUtil.getRs());
-//		return rc;
-//	}
-//	
-//	public int executeWaterTest(WaterTestResult wtr){
-//		int rc=0;
-//		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
-//		String nowTime = simpleDateFormat.format(new java.util.Date());
-//		String result=wtr.getWaterTestResult();
-//		String sql="";
-//		sql="update BottleDetectInfo set FinalDetectResult=?, FinalDetectDate=?, "
-//				+ "WaterTestResult=?, WaterTestOver=?,  WaterTestOperator=?, "
-//				+ "WaterTestDate=?, FailPos=? where BottleDetectNumber=?";
-//		if(result.equals("0")){
-//			String[] parameters={"鍒ゅ簾",nowTime,"0","1",wtr.getOperatorName(),nowTime,"WT",wtr.getBottleDetectNumber()};
-//			DBUtil.executeUpdate(sql, parameters);
-//		}else{
-//			String[] parameters={"-",null,"1","1",wtr.getOperatorName(),nowTime,null,wtr.getBottleDetectNumber()};
 //			DBUtil.executeUpdate(sql, parameters);
 //		}
 //		rc=1;

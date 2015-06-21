@@ -6,7 +6,7 @@
 <%ii = ud.executeSearchItem(itemNumber);%>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
         <title>拍卖管理系统-物品详细信息</title><!--                       CSS                       -->
         <!-- Reset Stylesheet -->
         <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen"><!-- Main Stylesheet -->
@@ -154,14 +154,14 @@
                 <div style="text-align:center">
                     <!-- Start Content Box -->
                 </div>
+                <form action="/Auction/servlet/UpdateItem?itemNumber=<%=ii.getItemNumber()%>" method="post">
                 <div class="content-box-header">
                     <div align="center"></div>
                     <h3 align="center">物品详细信息表</h3>
                     <ul class="content-box-tabs">
                         <!-- href must be unique and match the id of target div -->
                     </ul>
-                    <div style="float:right;margin: 10px 10px 0px 0px;"><input type=button value="删除" onclick="javascript:window.location.href='/Auction/DeleteItem?itemNumber=<%=ii.getItemNumber() %>'"/></div>
-                    <div style="float:right;margin: 10px 20px 0px 0px;"><input type=button value="修改" onclick="javascript:window.location.href='/Auction/UpdateItem.jsp?itemNumber=<%=ii.getItemNumber() %>'"/></div>
+                    <div style="float:right;margin: 10px 20px 0px 0px;"><input type="submit" value="保存"/></div>
                     <div class="clear"></div>
                 </div><!-- End .content-box-header -->
                 <div class="content-box-content">
@@ -195,7 +195,7 @@
                                     </td>
                                     <td style="width:15px;">:</td>
                                     <td>
-                                        <%=ii.getItemName()%>
+                                        <input type="text" name="itemName" value="<%=ii.getItemName()%>"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -204,7 +204,7 @@
                                     </td>
                                     <td style="width:15px;">:</td>
                                     <td>
-                                        <%=ii.getItemDescription()%>
+                                        <input type="text" name="itemDescription" value="<%=ii.getItemDescription()%>"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -213,7 +213,7 @@
                                     </td>
                                     <td style="width:15px;">:</td>
                                     <td>
-                                        <%=ii.getStartBidDate()%>
+                                        <input type="text" name="startBidDate" value="<%=ii.getStartBidDate()%>"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -222,7 +222,7 @@
                                     </td>
                                     <td style="width:15px;">:</td>
                                     <td>
-                                        <%=ii.getEndBidDate()%>
+                                        <input type="text" name="endBidDate" value="<%=ii.getEndBidDate()%>"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -231,7 +231,7 @@
                                     </td>
                                     <td style="width:15px;">:</td>
                                     <td>
-                                        <%=ii.getStartBidPrice()%>
+                                        <input type="text" name="startBidPrice" value="<%=ii.getStartBidPrice()%>"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -240,7 +240,7 @@
                                     </td>
                                     <td style="width:15px;">:</td>
                                     <td>
-                                        <%=ii.getItemClassNumber()%>
+                                        <input type="text" name="itemClassNumber" value="<%=ii.getItemClassNumber()%>"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -260,6 +260,7 @@
                     	</fieldset><!-- End .clear -->
                     </div><!-- End #tab2 -->
                 </div><!-- End .content-box-content -->
+                </form>
             </div><!-- End .content-box -->
             <!-- End .content-box -->
             <!-- End .content-box -->
