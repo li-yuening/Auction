@@ -160,7 +160,7 @@
                     <ul class="content-box-tabs">
                         <!-- href must be unique and match the id of target div -->
                     </ul>
-                    <div style="float:right;margin: 10px 10px 0px 0px;"><input type=button value="删除" onclick="javascript:window.location.href='/Auction/DeleteItem?itemNumber=<%=ii.getItemNumber() %>'"/></div>
+                    <div style="float:right;margin: 10px 10px 0px 0px;"><input type=button value="删除" onclick="javascript:window.location.href='/Auction/servlet/DeleteItem?itemNumber=<%=ii.getItemNumber() %>'"/></div>
                     <div style="float:right;margin: 10px 20px 0px 0px;"><input type=button value="修改" onclick="javascript:window.location.href='/Auction/UpdateItem.jsp?itemNumber=<%=ii.getItemNumber() %>'"/></div>
                     <div class="clear"></div>
                 </div><!-- End .content-box-header -->

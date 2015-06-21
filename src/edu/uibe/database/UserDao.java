@@ -291,6 +291,22 @@ public class UserDao {
 		}
 		return result;
 	}
+	
+	public boolean executeDeleteItem(String itemNumber){
+		boolean result = true;
+		String sql = "delete from auction.dbo.物品信息 where 物品编号=?";
+		String[] parameters={itemNumber};
+		try{
+			DBUtil.executeUpdate(sql,parameters);
+		}catch(Exception e){
+			e.printStackTrace();
+			result = false;
+		}finally{
+			DBUtil.close(DBUtil.getConn(), DBUtil.getPs(), DBUtil.getRs());
+		}
+		return result;
+	}
+
 
 //	//Execute first-step detection, and return bottle detection number, as well as report number
 //	public BottleDetectNumber_RptNo executeChubuPanduan(ChubuPanduanResult cpr){
@@ -1158,21 +1174,6 @@ public class UserDao {
 			}
 		}
 		return list;
-	}
-
-	public boolean executeDelete(String userid){
-		boolean result = true;
-		String sql = "delete from STAFF where STAFFNO=?";
-		String[] parameters={userid};
-		try{
-			DBUtil.executeUpdate(sql,parameters);
-		}catch(Exception e){
-			e.printStackTrace();
-			result = false;
-		}finally{
-			DBUtil.close(DBUtil.getConn(), DBUtil.getPs(), DBUtil.getRs());
-		}
-		return result;
 	}
 
 	public boolean executeUpdate(Staff user){
