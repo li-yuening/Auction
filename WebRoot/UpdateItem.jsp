@@ -7,7 +7,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
-        <title>拍卖管理系统-物品详细信息</title><!--                       CSS                       -->
+        <title>拍卖管理系统-修改物品信息</title><!--                       CSS                       -->
         <!-- Reset Stylesheet -->
         <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen"><!-- Main Stylesheet -->
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"><!-- Invalid Stylesheet. This makes stuff look pretty. Remove it if you want the CSS completely valid -->
@@ -148,7 +148,7 @@
             <noscript><!-- Show a notification if the user has disabled javascript --></noscript> <!-- End .shortcut-buttons-set -->
             <div class="clear"></div><!-- End .clear -->
            	<div>
-           		<p>当前位置：拍卖管理系统　&gt;　物品信息管理　&gt;　物品详细信息</p>
+           		<p>当前位置：拍卖管理系统　&gt;　物品信息管理　&gt;　修改物品信息</p>
            	</div>
             <div class="content-box">
                 <div style="text-align:center">
