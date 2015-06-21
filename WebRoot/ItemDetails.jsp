@@ -1,11 +1,13 @@
-<%@page language="java" import="java.util.ArrayList,edu.uibe.database.*,edu.uibe.model.*" pageEncoding="UTF-8"%>
-<%!ArrayList<ItemInfo> list  = new ArrayList<ItemInfo>();%>
+<%@page language="java" import="javax.servlet.*,java.util.*,edu.uibe.database.*,edu.uibe.model.*" pageEncoding="UTF-8"%>
+<%request.setCharacterEncoding("UTF-8");%>
+<%String itemNumber = request.getParameter("itemNumber");%>
+<%!ItemInfo ii = new ItemInfo();%>
 <%!UserDao ud = new UserDao();%>
-<%list = ud.executeQueryItem();%>
+<%ii = ud.executeSearchItem(itemNumber);%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>拍卖管理系统-物品信息表</title><!--                       CSS                       -->
+        <title>拍卖管理系统-物品详细信息</title><!--                       CSS                       -->
         <!-- Reset Stylesheet -->
         <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen"><!-- Main Stylesheet -->
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"><!-- Invalid Stylesheet. This makes stuff look pretty. Remove it if you want the CSS completely valid -->
@@ -87,7 +89,7 @@
                         </a>
                         <ul>
                         	<li>
-                                <a class="current" href="#">查看物品</a>
+                                <a class="current" href="/Auction/ItemInfo.jsp">查看物品</a>
                             </li>
                             <li>
                                 <a href="/Auction/SearchItem.jsp">搜索物品</a>
@@ -146,7 +148,7 @@
             <noscript><!-- Show a notification if the user has disabled javascript --></noscript> <!-- End .shortcut-buttons-set -->
             <div class="clear"></div><!-- End .clear -->
            	<div>
-           		<p>当前位置：拍卖管理系统 &gt; 物品信息管理</p>
+           		<p>当前位置：拍卖管理系统　&gt;　物品信息管理　&gt;　物品详细信息</p>
            	</div>
             <div class="content-box">
                 <div style="text-align:center">
@@ -154,10 +156,12 @@
                 </div>
                 <div class="content-box-header">
                     <div align="center"></div>
-                    <h3 align="center">物品信息表</h3>
+                    <h3 align="center">物品详细信息表</h3>
                     <ul class="content-box-tabs">
                         <!-- href must be unique and match the id of target div -->
                     </ul>
+                    <div style="float:right;margin: 10px 10px 0px 0px;"><button>删除</button></div>
+                    <div style="float:right;margin: 10px 20px 0px 0px;"><button>修改</button></div>
                     <div class="clear"></div>
                 </div><!-- End .content-box-header -->
                 <div class="content-box-content">
@@ -166,49 +170,88 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th style="padding-left: 30px;width:14%;">物品编号</th>
-                                    <th>物品名称</th>
-                                    <th>物品描述</th>
-                                    <th>起拍日期</th>
-                                    <th>结束日期</th>
-                                    <th>起拍价</th>
-                                    <th style="width: 8%;">操作</th>
+                                    <th style="text-align: right;padding-right: 1px;width:45%;">条目</th>
+                                    <th style="width:15px;"></th>
+                                    <th>内容</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <td colspan="6">
-                                        <!-- End .pagination -->
-                                        <div class="clear"></div>
-                                    </td>
                                 </tr>
                             </tfoot>
                             <tbody>
-                                <%for(int i=0;i<list.size();i++){%>
                                 <tr>
-                                    <td style="padding-left: 30px;width:14%;">
-                                    	<%=list.get(i).getItemNumber()%>
+                                    <td style="text-align: right;padding-right: 1px;width:45%;">
+                                    	物品编号
                                     </td>
+                                    <td style="width:15px;">:</td>
                                     <td>
-                                        <%=list.get(i).getItemName()%>
-                                    </td>
-                                    <td>
-                                        <%=list.get(i).getItemDescription()%>
-                                    </td>
-                                    <td>
-                                        <%=list.get(i).getStartBidDate()%>
-                                    </td>
-                                    <td>
-                                        <%=list.get(i).getEndBidDate()%>
-                                    </td>
-                                    <td>
-                                        <%=list.get(i).getStartBidPrice()%>
-                                    </td>
-                                    <td style="width: 8%;">
-                                        <a href="/Auction/ItemDetails.jsp?itemNumber=<%=list.get(i).getItemNumber()%>"><input type="button" value="详情"></a>
+                                        <%=ii.getItemNumber()%>
                                     </td>
                                 </tr>
-								<%}%>
+                                <tr>
+                                    <td style="text-align: right;padding-right: 1px;width:45%;">
+                                    	物品名称
+                                    </td>
+                                    <td style="width:15px;">:</td>
+                                    <td>
+                                        <%=ii.getItemName()%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right;padding-right: 1px;width:45%;">
+                                    	物品描述
+                                    </td>
+                                    <td style="width:15px;">:</td>
+                                    <td>
+                                        <%=ii.getItemDescription()%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right;padding-right: 1px;width:45%;">
+                                    	起拍日期
+                                    </td>
+                                    <td style="width:15px;">:</td>
+                                    <td>
+                                        <%=ii.getStartBidDate()%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right;padding-right: 1px;width:45%;">
+                                    	结束日期
+                                    </td>
+                                    <td style="width:15px;">:</td>
+                                    <td>
+                                        <%=ii.getEndBidDate()%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right;padding-right: 1px;width:45%;">
+                                    	起标价
+                                    </td>
+                                    <td style="width:15px;">:</td>
+                                    <td>
+                                        <%=ii.getStartBidPrice()%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right;padding-right: 1px;width:45%;">
+                                    	物品类别编号
+                                    </td>
+                                    <td style="width:15px;">:</td>
+                                    <td>
+                                        <%=ii.getItemClassNumber()%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right;padding-right: 1px;width:45%;">
+                                    	所属者编号
+                                    </td>
+                                    <td style="width:15px;">:</td>
+                                    <td>
+                                        <%=ii.getItemBelongedNumber()%>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div><!-- End #tab1 -->

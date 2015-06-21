@@ -243,6 +243,39 @@ public class UserDao {
 		}
 		return list;
 	}
+	
+	public ItemInfo executeSearchItem(String itemNumber){
+		ItemInfo ii = new ItemInfo();
+		String sql = "select * from 物品信息 where 物品编号=?";
+		String[] parameters = {itemNumber};
+		ResultSet rs = DBUtil.executeQuery(sql,parameters);
+		try {
+			if(rs.next()){
+				ii.setItemNumber(rs.getString("物品编号"));
+				ii.setItemName(rs.getString("物品名称"));
+				ii.setItemDescription(rs.getString("物品描述"));
+				ii.setStartBidDate(rs.getString("起拍日期"));
+				ii.setEndBidDate(rs.getString("结束日期"));
+				ii.setStartBidPrice(rs.getString("起标价"));
+				ii.setItemClassNumber(rs.getString("物品类别编号"));
+				ii.setItemBelongedNumber(rs.getString("所属者编号"));
+			} else {
+				ii.setItemName("空");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			DBUtil.close(DBUtil.getConn(), DBUtil.getPs(), DBUtil.getRs());
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return ii;
+	}
 
 //	//Execute first-step detection, and return bottle detection number, as well as report number
 //	public BottleDetectNumber_RptNo executeChubuPanduan(ChubuPanduanResult cpr){
